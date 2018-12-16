@@ -2,34 +2,23 @@ box:
   id: node:10
 build:
   steps:
-    - bash-template:
-        cwd: $WERCKER_ROOT
     # A custom script step, name value is used in the UI
     # and the code value contains the command that get executed
     - script:
-      name: npm create react project 
-      code: |
-        npm init react-app app
-        cp -R ./src ./app/
-        cp -R ./public ./app/
-        cp package-lock.json ./app/
-        cp package.json ./app/
-        
-        
-    - script: 
-        name: install modules and build project
-        code: |
-          ls -l
-          rm -rf node_modules
-          npm install
-          npm run build
-          serve -s build
-        
+          - script:
+        code: export NODE_ENV='testing'
+    # A step that executes `npm install` command
+    - npm-install
+    # A step that executes `npm test` command
+    #- npm-test
+
+    # A custom script step, name value is used in the UI
+    # and the code value contains the command that get executed
     - script:
         name: echo nodejs information
         code: |
           echo "node version $(node -v) running"
-          echo "npm version $(npm -v) running" 
+          echo "npm version $(npm -v) running"
           
 docker-build:
   steps:
