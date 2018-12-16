@@ -18,7 +18,8 @@ build:
         code: |
           echo "node version $(node -v) running"
           echo "npm version $(npm -v) running"
-          
+
+
 docker-build:
   steps:
     - internal/docker-build:
