@@ -57,5 +57,5 @@ kubernetes-deploy:
         server: $KUBE_ENDPOINT
         token: $KUBE_USER_TOKEN
         insecure-skip-tls-verify: true
-        cwd: $WERCKER_ROOT
+        cwd: $WERCKER_ROOT/.
         command: apply -f front-end-deployment.yaml
