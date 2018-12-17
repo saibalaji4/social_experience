@@ -11,9 +11,7 @@ spec:
     name: http
   selector:
     app: react-front-end
-	
 ---
-
 apiVersion: extensions/v1beta1
 kind: Deployment
 metadata:
