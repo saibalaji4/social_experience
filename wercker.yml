@@ -34,15 +34,24 @@ docker-build:
         registry: $PRIVATE_REGISTRY_PATH 
         tag: ${WERCKER_GIT_BRANCH}-${WERCKER_GIT_COMMIT},latest
 
+
 kubernetes-deploy:
   steps: 
+    - script:
+            name: debug
+            code: |
+              echo $WERCKER_OUTPUT_DIR
+              ls -l $WERCKER_OUTPUT_DIR
+              echo $WERCKER_ROOT
+              ls -l $WERCKER_ROOT
+  
     - bash-template:
         cwd: $WERCKER_ROOT/.
         
     - script:
         name: echo nodejs information
         code: | 
-          cat ./front-end-deployment.yaml
+          cat ./socialexperience-frontend-deployment.yaml
           
     - kubectl:
         server: $KUBE_ENDPOINT
