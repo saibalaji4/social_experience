@@ -25,6 +25,6 @@ spec:
     spec:
       containers:
       - name: ora-se-symposium-front-end
-        image: saibalaji/socialexperience-reactapp:${WERCKER_GIT_BRANCH}-${WERCKER_GIT_COMMIT}
+        image: $PRIVATE_REGISTRY_PATH/$TENANCY_NAME/$REPO_NAME/$APP_NAME:${WERCKER_GIT_BRANCH}-${WERCKER_GIT_COMMIT}
         ports:
         - containerPort: 5000
