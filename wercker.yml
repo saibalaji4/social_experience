@@ -24,14 +24,15 @@ docker-build:
   steps:
     - internal/docker-build:
         dockerfile: Dockerfile
-        image-name: oracle-se-symposium-frontend
+        image-name: $APP_NAME
 
     - internal/docker-push: 
-        image-name: oracle-se-symposium-frontend
-        username: $DOCKER_USERNAME  
-        password: $DOCKER_PASSWORD 
-        repository: $DOCKER_USERNAME/$REPO_ADDRESS
-        tag: ${WERCKER_GIT_BRANCH}-${WERCKER_GIT_COMMIT} , latest
+        image-name: $APP_NAME
+        username: $CONTAINER_REGISTRY_USERNAME
+        password: $API_USER_TOKEN
+        repository: $TENANCY_NAME/$REPO_NAME/$APP_NAME
+        registry: $PRIVATE_REGISTRY_PATH 
+        tag: ${WERCKER_GIT_BRANCH}-${WERCKER_GIT_COMMIT},latest
 
 kubernetes-deploy:
   steps: 
