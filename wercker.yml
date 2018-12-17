@@ -11,7 +11,6 @@ build:
     - npm-install
     # A step that executes `npm test` command
     # npm-test
-
     # A custom script step, name value is used in the UI
     # and the code value contains the command that get executed
     - script:
@@ -39,14 +38,12 @@ docker-build:
         repository: $TENANCY_NAME/$REPO_NAME/$APP_NAME
         registry: $PRIVATE_REGISTRY_PATH 
         tag: ${WERCKER_GIT_BRANCH}-${WERCKER_GIT_COMMIT},latest
-
   after-steps:
     - install-packages:
         packages: ruby
     - pasonatquila/pretty-slack-notify@0.3.6:
         webhook_url: $SLACK_URL
         channel: $SLACK_CHANNEL
-
 
 kubernetes-deploy:
   steps: 
@@ -60,19 +57,18 @@ kubernetes-deploy:
   
     - bash-template:
         cwd: $WERCKER_ROOT/.
-        
+  
     - script:
         name: echo nodejs information
         code: | 
           cat ./socialexperience-frontend-deployment.yaml
-          
+     
     - kubectl:
         server: $KUBE_ENDPOINT
         token: $KUBE_USER_TOKEN
         insecure-skip-tls-verify: true
         cwd: $WERCKER_ROOT/.
         command: apply -f socialexperience-frontend-deployment.yaml
-  
   after-steps:
     - install-packages:
         packages: ruby
